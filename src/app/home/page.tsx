@@ -53,7 +53,7 @@ export default function Home() {
 			}, 3000);
 			return () => clearTimeout(timer);
 		}
-	}, []);
+	}, [customers, editCustomer, editedCustomer, setEditCustomer, setEditedCustomer]);
 
 	useEffect(() =>  {
 		(async () => {
