@@ -1,0 +1,30 @@
+.outerContainer {
+  background: lightgray;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+  margin: 1rem;
+  padding: 1rem;
+
+  input {
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0 1rem;
+    padding: 1rem;
+    width: 100%;
+
+    @media (min-width: theme('screens.lg')) {
+      width: 50%;
+    }
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+}

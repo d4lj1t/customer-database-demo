@@ -1,0 +1,68 @@
+.outerContainer {
+    padding: 1rem;
+}
+
+.cardsContainer {
+    margin-top: 2rem;
+    @media (min-width: theme('screens.md')) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+.pageHeading {
+    color: dimgrey;
+    font-size: 1.5rem;
+}
+
+.customerCard {
+    background: lightgray;
+    border-radius: 0.5rem;
+    border: 1px solid grey;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+    color: grey;
+    flex: auto;
+    margin-bottom: 2rem;
+    padding: 1rem;
+
+    &:hover {
+        background-color: white;
+        transition: background-color 0.2s ease-in-out;
+        section div {
+            background-color: white;
+            transition: background-color 0.2s ease-in-out;
+        }
+    }
+
+    @media (min-width: theme('screens.md')) {
+        margin-bottom: 0;
+        width: fit-content;
+    }
+
+    section {
+        display: block;
+        margin-bottom: 1rem;
+
+        div {
+            background: lightgray;
+            color: black;
+        }
+
+        > div:first-child {
+            color: grey;
+        }
+    }
+}
+
+.buttonContainer {
+    text-align: right;
+}
+
+.updated {
+    background: white;
+
+    section div {
+        background: white;
+    }
+}
