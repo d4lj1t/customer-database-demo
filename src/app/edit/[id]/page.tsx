@@ -121,9 +121,11 @@ export default function EditCustomer({params}: {
 					<Link href={`/home`}>
 						<button type="reset" className="secondaryButton">Cancel</button>
 					</Link>
-					<Link href={`/home`}>
-						<button onClick={() => handleDelete()} className="secondaryButton">Delete</button>
-					</Link>
+					{customer.userId && (
+						<Link href={`/home`}>
+							<button onClick={() => handleDelete()} className="secondaryButton">Delete</button>
+						</Link>
+					)}
 					<button type="submit" className="primaryButton">Save</button>
 				</div>
 			</form>

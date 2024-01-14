@@ -21,7 +21,7 @@ export async function DELETE(request: NextRequest, context: { params: never; }) 
 
 		const userId = session.user.sub as string;
 
-		const result = await customerModel.deleteOne({ _id: String(params.id), userId });
+		const result = await customerModel.deleteOne({ _id: String(params.id.toString()), userId });
 
 		if (result.deletedCount === 0) {
 			return NextResponse.json({ message: 'Customer not found' }, { status: 404 });
