@@ -24,18 +24,18 @@ export async function POST(request: NextRequest) {
 
 		const defaultData = await customerModel.find({ userId: { $exists: false, $eq: null } });
 
-		const existingCustomer = await customerModel.findOne({ userId });
+		const existingCustomer = await customerModel.findOne({ userId }) as Customer;
 
 		if (!existingCustomer) {
 			try {
 				const newArrayWithUserId = defaultData.map((defaultItem) => {
 					return {
 						userId: userId,
-						name: defaultItem.name,
-						street: defaultItem.street,
-						email: defaultItem.email,
-						phone: defaultItem.phone,
-						age: defaultItem.age,
+						name: String(defaultItem.name),
+						street: String(defaultItem.street),
+						email: String(defaultItem.email),
+						phone: String(defaultItem.phone),
+						age: String(defaultItem.age),
 					};
 				});
 
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
 				return NextResponse.json({ error: errorMessage }, { status: 500 });
 			}
 		}
-	} catch (error: any) {
+	} catch (error) {
 		console.error('Failed to update customer database', error);
 
 		const errorMessage = error instanceof Error && error.message ? error.message : 'Failed to update customer database';

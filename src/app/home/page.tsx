@@ -66,7 +66,7 @@ export default function Home() {
 					throw new Error(`HTTP error! Status: ${res.status}`);
 				}
 
-				const data = await res.json();
+				const data = await res.json() as Customer[];
 				setCustomers(data);
 			} catch (error) {
 				console.error('Error fetching customer:', error);

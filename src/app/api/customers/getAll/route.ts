@@ -1,9 +1,10 @@
-import {type NextRequest, NextResponse} from 'next/server';
+import {NextResponse} from 'next/server';
 import {getSession, withApiAuthRequired} from '@auth0/nextjs-auth0';
 import connectToMongoDb from '@/app/libs/mongodb';
 import customerModel from '@/app/models/customer';
+import {type Customer} from '@/app/types';
 
-const GET = withApiAuthRequired(async (request: NextRequest) => {
+const GET = withApiAuthRequired(async () => {
 	try {
 		await connectToMongoDb();
 
@@ -16,7 +17,7 @@ const GET = withApiAuthRequired(async (request: NextRequest) => {
 		const userId = session.user.sub as string;
 
 		const defaultData = await customerModel.find({ userId: { $exists: false, $eq: null } });
-		const myCustomers = await customerModel.findOne({userId});
+		const myCustomers = await customerModel.findOne({userId}) as Customer;
 
 		let data;
 
@@ -38,7 +39,7 @@ const GET = withApiAuthRequired(async (request: NextRequest) => {
 				'Cache-Control': 'no-store, max-age=0, must-revalidate',
 			},
 		});
-	} catch (error: any) {
+	} catch (error) {
 		console.error('Error fetching customers:', error);
 
 		const errorMessage = error instanceof Error && error.message ? error.message : 'Failed to fetch customers';

@@ -20,16 +20,16 @@ export async function POST(request: NextRequest) {
 
 		const userId = session.user.sub as string;
 
-		const {_id, name, street, email, phone, age} = await request.json() as Customer;
+		const {ID, name, street, email, phone, age} = await request.json() as Customer;
 
 		const defaultData = await customerModel.find({userId: {$exists: false, $eq: null}});
 
-		const existingCustomer = await customerModel.findOne({userId});
+		const existingCustomer = await customerModel.findOne({userId}) as Customer;
 
 		if (!existingCustomer) {
 			try {
 				const newArrayWithUserId = defaultData.map((defaultItem) => {
-					if (defaultItem._id.toString() === _id) {
+					if (defaultItem._id.toString() === ID) {
 						return {
 							userId: userId,
 							name: name,
@@ -41,11 +41,11 @@ export async function POST(request: NextRequest) {
 					}
 					return {
 						userId: userId,
-						name: defaultItem.name,
-						street: defaultItem.street,
-						email: defaultItem.email,
-						phone: defaultItem.phone,
-						age: defaultItem.age
+						name: String(defaultItem.name),
+						street: String(defaultItem.street),
+						email: String(defaultItem.email),
+						phone: String(defaultItem.phone),
+						age: String(defaultItem.age),
 					};
 				});
 
@@ -65,8 +65,8 @@ export async function POST(request: NextRequest) {
 		} else if (existingCustomer) {
 			try {
 				await customerModel.updateOne(
-					{_id: _id.toString()},
-					{$set: {userId, _id, name, street, email, phone, age}},
+					{_id: String(ID.toString())},
+					{$set: {userId, ID, name, street, email, phone, age}},
 					{upsert: true}
 				);
 				return NextResponse.json({message: 'Existing Customer updated'}, {status: 201});
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
 				return NextResponse.json({error: errorMessage}, {status: 500});
 			}
 		}
-	} catch (error: any) {
+	} catch (error) {
 		console.error('Failed to update customer database', error);
 
 		const errorMessage = error instanceof Error && error.message ? error.message : 'Failed to update customer database';

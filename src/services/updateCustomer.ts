@@ -6,14 +6,14 @@ type ErrorResponse = {
 };
 
 export const updateCustomer = async (customer: Customer) => {
-	const {_id, name, street, email, phone, age} = customer;
+	const {_id: ID, name, street, email, phone, age} = customer;
 	try {
 		const res = await fetch(`${baseApiUrl}/api/customers/updateExisting`, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
 			},
-			body: JSON.stringify({_id, name, street, email, phone, age}),
+			body: JSON.stringify({ID, name, street, email, phone, age}),
 		})
 
 		if (!res.ok) {
