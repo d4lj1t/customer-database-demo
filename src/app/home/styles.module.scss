@@ -26,7 +26,7 @@
     margin-bottom: 2rem;
     padding: 1rem;
 
-    &:hover {
+    /*&:hover {
         background-color: white;
         transition: background-color 0.2s ease-in-out;
         section div {
@@ -34,7 +34,7 @@
             transition: background-color 0.2s ease-in-out;
         }
     }
-
+*/
     @media (min-width: theme('screens.md')) {
         margin-bottom: 0;
         width: fit-content;
