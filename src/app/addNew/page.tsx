@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from '@/app/hooks/useRouter';
+import {useRouter} from 'next/navigation';
 import styles from '@/app/styles/add-edit.module.scss';
 import Link from 'next/link';
 import {addNewCustomer} from '@/services/addNewCustomer';
