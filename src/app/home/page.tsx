@@ -50,7 +50,7 @@ export default function Home() {
 					setEditCustomer(undefined);
 					setEditedCustomer(undefined);
 				}
-			}, 1000);
+			}, 3000);
 			return () => clearTimeout(timer);
 		}
 	}, []);
