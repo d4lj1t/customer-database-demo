@@ -11,7 +11,7 @@ import {deleteCustomer} from '@/services/deleteCustomer';
 
 export default function EditCustomer({params}: {
 	params: {
-		id: String,
+		id: string,
 	}
 }) {
 	const [customer, setCustomer] = useState<Customer | null>(null);
@@ -57,7 +57,7 @@ export default function EditCustomer({params}: {
 	useEffect(() => {
 		(async () => {
 			try {
-				const response = await getCustomer(customerId as String);
+				const response = await getCustomer(customerId as string);
 				if ('name' in response) {
 					setCustomer(response);
 

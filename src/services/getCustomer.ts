@@ -5,7 +5,7 @@ type ErrorResponse = {
 	error: string;
 };
 
-export const getCustomer = async (id: String): Promise<Customer | ErrorResponse> => {
+export const getCustomer = async (id: string): Promise<Customer | ErrorResponse> => {
 	try {
 		const res = await fetch(`${baseApiUrl}/api/customers/getCustomer/${id}`, {
 			method: 'GET',

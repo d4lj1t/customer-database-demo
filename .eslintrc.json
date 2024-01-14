@@ -1,3 +1,16 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "@typescript-eslint/naming-convention": "error",
+    "@typescript-eslint/no-unsafe-assignment": "error"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
 }

@@ -28,7 +28,7 @@ const GET = withApiAuthRequired(async (request: NextRequest, context: any) => {
 			data = defaultData;
 		}
 
-		const customer = data.find((x: { id: String; }) => params.id === x.id);
+		const customer = data.find((x: { id: string; }) => params.id === x.id);
 
 		return NextResponse.json(customer, {
 			headers: {
