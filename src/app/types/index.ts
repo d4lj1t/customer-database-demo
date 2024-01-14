@@ -1,4 +1,5 @@
 export type Customer = {
+	userId: string;
 	_id: string,
 	ID: string,
 	name: string,
