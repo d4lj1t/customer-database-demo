@@ -44,6 +44,13 @@ export default function Home() {
 		setCustomerUpdated(hasDataChanged);
 
 		if (hasDataChanged) {
+			const element = document.querySelector(`[data-id='${editedCustomer?._id}']`);
+			if (element) {
+				element.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start',
+				});
+			}
 			const timer = setTimeout(() => {
 				setCustomerUpdated(false);
 				if (setEditCustomer && setEditedCustomer) {
