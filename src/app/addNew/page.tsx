@@ -58,13 +58,13 @@ export default function AddNewCustomerPage() {
 				<label>
 					<div>Phone</div>
 					<div>
-						<input required type="tel" name="telephone" onChange={(e) => handleInputChange('phone', e.target.value)} />
+						<input required type="tel" name="telephone" pattern="[0-9]{10,}" title="min 10 digits" onChange={(e) => handleInputChange('phone', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Age</div>
 					<div>
-						<input required type="number" name="age" onChange={(e) => handleInputChange('age', e.target.value)} />
+						<input required type="number" name="age" min="1" max="120" onChange={(e) => handleInputChange('age', e.target.value)} />
 					</div>
 				</label>
 				<div className={styles.buttonsContainer}>

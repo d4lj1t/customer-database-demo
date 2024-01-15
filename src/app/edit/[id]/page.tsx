@@ -108,13 +108,13 @@ export default function EditCustomer({params}: {
 				<label>
 					<div>Phone</div>
 					<div>
-						<input type="tel" name="telephone" required value={String(editedData.phone)} onChange={(e) => handleInputChange('phone', e.target.value)} />
+						<input type="tel" name="telephone" pattern="[0-9]{10,}" title="min 10 digits" required value={String(editedData.phone)} onChange={(e) => handleInputChange('phone', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Age</div>
 					<div>
-						<input type="number" name="age" required value={String(editedData.age)} onChange={(e) => handleInputChange('age', e.target.value)} />
+						<input type="number" name="age" min="1" max="120" required value={String(editedData.age)} onChange={(e) => handleInputChange('age', e.target.value)} />
 					</div>
 				</label>
 				<div className={styles.buttonsContainer}>
