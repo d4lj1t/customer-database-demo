@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@auth0/nextjs-auth0';
 import { type Customer } from '@/app/types';
-/*import connectToMongoDb from '@/app/libs/mongodb';*/
 import customerModel from '@/app/models/customer';
 
 export async function POST(request: NextRequest) {
