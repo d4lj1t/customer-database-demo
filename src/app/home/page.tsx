@@ -16,6 +16,7 @@ export default function Home() {
 	const [customers, setCustomers] = useState<Array<Customer> | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [customerUpdated, setCustomerUpdated] = useState(false);
+	const [customerAdded, setCustomerAdded] = useState(false);
 	const [addedCustomer, setAddedCustomer] = useState<Customer | undefined>(undefined);
 
 	const {editCustomer, setEditCustomer} = useContext(Context) || {};
@@ -83,10 +84,11 @@ export default function Home() {
 				const data = await res.json() as Customer[];
 				setCustomers(data);
 
-				/*const customerListSet = new Set(customerList?.map(item => item._id));
+				const customerListSet = new Set(customerList?.map(item => item._id));
 
 				const addedItem = data.find(item => !customerListSet.has(item._id));
-				/!*setCustomerUpdated(addedItem !== undefined);*!/
+
+				setCustomerAdded(customerList !== null && addedItem !== undefined);
 
 				if (addedItem && customerList) {
 					setAddedCustomer(addedItem);
@@ -100,14 +102,14 @@ export default function Home() {
 					}
 
 					const timer = setTimeout(() => {
-						/!*setCustomerUpdated(false);*!/
+						setCustomerAdded(false);
 						setAddedCustomer(undefined);
 						if (setCustomerList) {
 							setCustomerList(null);
 						}
-					}, 6000);
+					}, 3000);
 					return () => clearTimeout(timer);
-				}*/
+				}
 			} catch (error) {
 				console.error('Error fetching customer:', error);
 				const errorMessage = error instanceof Error && error.message ? error.message : 'Failed to fetch customers';
@@ -131,7 +133,7 @@ export default function Home() {
 				{customers && customers.length > 0 && (
 					<section className={styles.cardsContainer}>
 						{customers.map((person, index) => (
-							<section className={`${styles.customerCard} ${person._id?.toString() === editCustomer?._id?.toString() && customerUpdated && styles.updated}`} key={index} data-id={person._id}>
+							<section className={`${styles.customerCard} ${person._id?.toString() === editCustomer?._id?.toString() && customerUpdated && styles.updated} ${person._id?.toString() === addedCustomer?._id?.toString() && customerAdded && styles.updated}`} key={index} data-id={person._id}>
 								<section>
 									<div>Name</div>
 									<div>{String(person.name)}</div>
