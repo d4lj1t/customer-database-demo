@@ -33,11 +33,11 @@ const GET = withApiAuthRequired(async () => {
 			await customerModel.insertMany(newData);
 		}
 
-		const data = await customerModel.find({ userId });
+		const data = await customerModel.find({ userId }).lean();
 
-		data.sort((a: { name: string }, b: { name: string }) => {
-			const nameA = a.name.charAt(0).toLowerCase();
-			const nameB = b.name.charAt(0).toLowerCase();
+		data.sort((a, b) => {
+			const nameA = a.name.charAt(0).toLowerCase() as string;
+			const nameB = b.name.charAt(0).toLowerCase() as string;
 
 			return nameA.localeCompare(nameB);
 		});

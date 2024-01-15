@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@auth0/nextjs-auth0';
 import customerModel from '@/app/models/customer';
 
-export async function DELETE(request: NextRequest, context: { params: {id: string}; }) {
+export async function DELETE(request: NextRequest, context: { params: { id: string }; }) {
 	try {
 		const { params } = context;
 
@@ -24,7 +24,9 @@ export async function DELETE(request: NextRequest, context: { params: {id: strin
 			return NextResponse.json({ message: 'Customer not found' }, { status: 404 });
 		}
 
-		return NextResponse.json({ message: 'Customer deleted successfully' }, { status: 200 });
+		const sanitizedResult = { deletedCount: result.deletedCount };
+
+		return NextResponse.json({ message: 'Customer deleted successfully', result: sanitizedResult }, { status: 200 });
 	} catch (error) {
 		console.error('Failed to delete customer from the database', error);
 
