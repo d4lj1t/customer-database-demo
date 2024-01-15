@@ -22,47 +22,9 @@ export async function POST(request: NextRequest) {
 
 		const {ID, name, street, email, phone, age} = await request.json() as Customer;
 
-		const defaultData = await customerModel.find({userId: {$exists: false, $eq: null}});
-
 		const existingCustomer = await customerModel.findOne({userId}) as Customer;
 
-		if (!existingCustomer) {
-			try {
-				const newArrayWithUserId = defaultData.map((defaultItem) => {
-					if (defaultItem._id.toString() === ID) {
-						return {
-							userId: userId,
-							name: name,
-							street: street,
-							email: email,
-							phone: phone,
-							age: age
-						};
-					}
-					return {
-						userId: userId,
-						name: String(defaultItem.name),
-						street: String(defaultItem.street),
-						email: String(defaultItem.email),
-						phone: String(defaultItem.phone),
-						age: String(defaultItem.age),
-					};
-				});
-
-				await customerModel.insertMany(newArrayWithUserId);
-
-				return NextResponse.json({message: 'Customers updated'}, {status: 201});
-			} catch (error) {
-				console.error('Error updating default customers with userId', error);
-
-				const errorMessage =
-					error instanceof Error && error.message
-						? error.message
-						: 'Failed to update customers';
-
-				return NextResponse.json({error: errorMessage}, {status: 500});
-			}
-		} else if (existingCustomer) {
+		if (existingCustomer) {
 			try {
 				await customerModel.updateOne(
 					{_id: String(ID.toString())},

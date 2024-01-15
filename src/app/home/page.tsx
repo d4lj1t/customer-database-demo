@@ -98,7 +98,7 @@ export default function Home() {
 				{customers && customers.length > 0 && (
 					<section className={styles.cardsContainer}>
 						{customers.map((person, index) => (
-							<section className={`${styles.customerCard} ${person._id.toString() === editCustomer?._id.toString() && customerUpdated && styles.updated}`} key={index} data-id={person._id}>
+							<section className={`${styles.customerCard} ${person._id?.toString() === editCustomer?._id?.toString() && customerUpdated && styles.updated}`} key={index} data-id={person._id}>
 								<section>
 									<div>Name</div>
 									<div>{String(person.name)}</div>

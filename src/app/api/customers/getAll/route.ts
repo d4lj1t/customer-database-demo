@@ -1,8 +1,8 @@
-import {NextResponse} from 'next/server';
-import {getSession, withApiAuthRequired} from '@auth0/nextjs-auth0';
+import { NextResponse } from 'next/server';
+import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import connectToMongoDb from '@/app/libs/mongodb';
 import customerModel from '@/app/models/customer';
-import {type Customer} from '@/app/types';
+import { Customer } from '@/app/types';
 
 const GET = withApiAuthRequired(async () => {
 	try {
@@ -12,22 +12,30 @@ const GET = withApiAuthRequired(async () => {
 
 		if (!session?.accessToken || !session.user) {
 			console.log('Invalid or missing access token or user in the session');
-			return NextResponse.json({error: 'Invalid or missing access token or user in the session'}, {status: 401});
+			return NextResponse.json({ error: 'Invalid or missing access token or user in the session' }, { status: 401 });
 		}
 		const userId = session.user.sub as string;
 
-		const defaultData = await customerModel.find({ userId: { $exists: false, $eq: null } });
-		const myCustomers = await customerModel.findOne({userId}) as Customer;
+		const existingData = await customerModel.findOne({ userId }) as Customer;
 
-		let data;
+		if (!existingData) {
+			const defaultData = await customerModel.find({ userId: { $exists: false, $eq: null } });
 
-		if (myCustomers) {
-			data = await customerModel.find({userId});
-		} else {
-			data = defaultData;
+			const newData = defaultData.map((item) => ({
+				userId: String(userId.toString()),
+				name: String(item.name),
+				street: String(item.street),
+				phone: String(item.phone),
+				email: String(item.email),
+				age: String(item.age),
+			}));
+
+			await customerModel.insertMany(newData);
 		}
 
-		data.sort((a: { name: string; }, b: { name: string; }) => {
+		const data = await customerModel.find({ userId });
+
+		data.sort((a: { name: string }, b: { name: string }) => {
 			const nameA = a.name.charAt(0).toLowerCase();
 			const nameB = b.name.charAt(0).toLowerCase();
 
@@ -46,8 +54,8 @@ const GET = withApiAuthRequired(async () => {
 
 		console.log('Error Message:', errorMessage);
 
-		return NextResponse.json({error: errorMessage}, {status: 500});
+		return NextResponse.json({ error: errorMessage }, { status: 500 });
 	}
 });
 
-export {GET};
+export { GET };
