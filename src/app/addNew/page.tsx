@@ -40,31 +40,31 @@ export default function AddNewCustomerPage() {
 				<label>
 					<div>Name</div>
 					<div>
-						<input required onChange={(e) => handleInputChange('name', e.target.value)} />
+						<input required type="text" name="name" onChange={(e) => handleInputChange('name', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Street</div>
 					<div>
-						<input required onChange={(e) => handleInputChange('street', e.target.value)} />
+						<input required type="text" name="street" onChange={(e) => handleInputChange('street', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Email</div>
 					<div>
-						<input required onChange={(e) => handleInputChange('email', e.target.value)} />
+						<input required type="email" name="email" onChange={(e) => handleInputChange('email', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Phone</div>
 					<div>
-						<input required onChange={(e) => handleInputChange('phone', e.target.value)} />
+						<input required type="tel" name="telephone" onChange={(e) => handleInputChange('phone', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Age</div>
 					<div>
-						<input required onChange={(e) => handleInputChange('age', e.target.value)} />
+						<input required type="number" name="age" onChange={(e) => handleInputChange('age', e.target.value)} />
 					</div>
 				</label>
 				<div className={styles.buttonsContainer}>

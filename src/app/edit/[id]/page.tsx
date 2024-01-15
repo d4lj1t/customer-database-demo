@@ -90,31 +90,31 @@ export default function EditCustomer({params}: {
 				<label>
 					<div>Name</div>
 					<div>
-						<input required value={String(editedData.name)} onChange={(e) => handleInputChange('name', e.target.value)} />
+						<input required type="text" name="name" value={String(editedData.name)} onChange={(e) => handleInputChange('name', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Street</div>
 					<div>
-						<input required value={String(editedData.street)} onChange={(e) => handleInputChange('street', e.target.value)} />
+						<input type="text" name="street" required value={String(editedData.street)} onChange={(e) => handleInputChange('street', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Email</div>
 					<div>
-						<input required value={String(editedData.email)} onChange={(e) => handleInputChange('email', e.target.value)} />
+						<input type="email" name="email" required value={String(editedData.email)} onChange={(e) => handleInputChange('email', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Phone</div>
 					<div>
-						<input required value={String(editedData.phone)} onChange={(e) => handleInputChange('phone', e.target.value)} />
+						<input type="tel" name="telephone" required value={String(editedData.phone)} onChange={(e) => handleInputChange('phone', e.target.value)} />
 					</div>
 				</label>
 				<label>
 					<div>Age</div>
 					<div>
-						<input required value={String(editedData.age)} onChange={(e) => handleInputChange('age', e.target.value)} />
+						<input type="number" name="age" required value={String(editedData.age)} onChange={(e) => handleInputChange('age', e.target.value)} />
 					</div>
 				</label>
 				<div className={styles.buttonsContainer}>
