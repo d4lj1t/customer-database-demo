@@ -1,13 +1,10 @@
 import {type NextRequest, NextResponse} from 'next/server';
 import {getSession, withApiAuthRequired} from '@auth0/nextjs-auth0';
-import connectToMongoDb from '@/app/libs/mongodb';
 import customerModel from '@/app/models/customer';
 import {type Customer} from '@/app/types';
 
 const GET = withApiAuthRequired(async (request: NextRequest, context) => {
 	try {
-		await connectToMongoDb();
-
 		const {params} = context;
 
 		const session = await getSession();

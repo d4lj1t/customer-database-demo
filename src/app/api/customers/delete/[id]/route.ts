@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@auth0/nextjs-auth0';
-import connectToMongoDb from '@/app/libs/mongodb';
 import customerModel from '@/app/models/customer';
 
 export async function DELETE(request: NextRequest, context: { params: {id: string}; }) {
 	try {
-		await connectToMongoDb();
-
 		const { params } = context;
 
 		const session = await getSession();
