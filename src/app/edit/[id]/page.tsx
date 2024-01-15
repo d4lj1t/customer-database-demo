@@ -108,7 +108,7 @@ export default function EditCustomer({params}: {
 				<label>
 					<div>Phone</div>
 					<div>
-						<input type="tel" name="telephone" pattern="[0-9]{10,}" title="min 10 digits" required value={String(editedData.phone)} onChange={(e) => handleInputChange('phone', e.target.value)} />
+						<input type="tel" name="telephone" required value={String(editedData.phone)} onChange={(e) => handleInputChange('phone', e.target.value)} />
 					</div>
 				</label>
 				<label>
