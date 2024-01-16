@@ -5,6 +5,7 @@ import {useRouter} from 'next/navigation';
 import styles from '@/app/styles/add-edit.module.scss';
 import Link from 'next/link';
 import {addNewCustomer} from '@/services/addNewCustomer';
+import {Customer} from '@/app/types';
 
 export default function AddNewCustomerPage() {
 	const router = useRouter();
@@ -26,7 +27,7 @@ export default function AddNewCustomerPage() {
 	const handleSave = async (e: React.FormEvent) => {
 		e.preventDefault();
 		try {
-			await addNewCustomer(newCustomer as never);
+			await addNewCustomer(newCustomer as Customer);
 			router.push('/home');
 		} catch (error) {
 			console.log('Failed to update customer');
