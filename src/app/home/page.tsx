@@ -90,11 +90,13 @@ export default function Home() {
 
 				setCustomerAdded(customerList !== null && addedItem !== undefined);
 
-				if (addedItem && customerList) {
+				if (customerList !== null && addedItem !== undefined) {
 					setAddedCustomer(addedItem);
 
 					const element = document.querySelector(`[data-id='${addedItem?._id}']`);
+					console.log('element', element);
 					if (element) {
+						console.log('comes into scroll if statement');
 						element.scrollIntoView({
 							behavior: 'smooth',
 							block: 'start',
