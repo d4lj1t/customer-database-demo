@@ -90,7 +90,7 @@ export default function Home() {
 
 				setCustomerAdded(customerList !== null && addedItem !== undefined);
 
-				if (customerList !== null && addedItem !== undefined) {
+				if (addedItem && customerList) {
 					setAddedCustomer(addedItem);
 
 					const timer = setTimeout(() => {
