@@ -93,16 +93,6 @@ export default function Home() {
 				if (customerList !== null && addedItem !== undefined) {
 					setAddedCustomer(addedItem);
 
-					const element = document.querySelector(`[data-id='${addedItem?._id}']`);
-					console.log('element', element);
-					if (element) {
-						console.log('comes into scroll if statement');
-						element.scrollIntoView({
-							behavior: 'smooth',
-							block: 'start',
-						});
-					}
-
 					const timer = setTimeout(() => {
 						setCustomerAdded(false);
 						setAddedCustomer(undefined);
@@ -123,6 +113,16 @@ export default function Home() {
 			}
 		})();
 	}, []);
+
+	useEffect(() => {
+		const element = document.querySelector(`[data-id='${addedCustomer?._id}']`);
+		if (element) {
+			element.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+			});
+		}
+	}, [addedCustomer]);
 
 	return (
 		<>
